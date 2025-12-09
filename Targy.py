@@ -11,8 +11,7 @@ class Targy:
         print(f"Felvetted: {self.nev}")
 
     def hasznal(self):
-        #használ kód
-        print(f"Használtad: {self.nev}")
+        print(f"⚡ Használtad: {self.nev.upper()}")
 
     def felolvas(self):
-        print(self.tartalom)
+        print(f"📖 {self.tartalom}")

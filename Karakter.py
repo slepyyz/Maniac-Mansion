@@ -10,11 +10,12 @@ class Karakter:
     def megy(self):
         import terkep
         import jatek
-        hova=input("Hova szeretnél menni?: ")
+        print("🚶 MOZGÁS:")
+        hova=input("🗺️  Hova szeretnél menni?: ")
         
         # Ellenőrizzük, hogy létezik-e a helyiség
         if hova not in jatek.szoba_lista:
-            print("Nincs ilyen helyiség")
+            print("❌ Nincs ilyen helyiség!")
             return
         
         # Bejárat ellenőrzés - csak kulccsal lehet bemenni (kivéve postaláda)
@@ -24,7 +25,7 @@ class Karakter:
                 if item.nev == "kulcs":
                     kulcs_megvan = True
             if not kulcs_megvan:
-                print("A bejáratból csak a postaládához mehetsz kulcs nélkül!")
+                print("🔐 A bejáratból csak a postaládához mehetsz kulcs nélkül!")
                 return
         
         # Folyosó ellenőrzés - csak zseblámpával lehet bemenni
@@ -34,8 +35,8 @@ class Karakter:
                 if item.nev == "zseblampa":
                     zseblampa_megvan = True
             if not zseblampa_megvan:
-                print("A folyosóra csak akkor mehetsz ha van zseblámpád!")
-                print("Gödörbe estél és börtönbe kerültél!")
+                print("🔦 A folyosóra csak akkor mehetsz ha van zseblámpád!")
+                print("💥 Gödörbe estél és börtönbe kerültél!")
                 self.bortonbe = True
                 return
         
@@ -43,7 +44,7 @@ class Karakter:
         if hova == "labor":
             import random
             csap_tipus = random.choice(["zold", "piros"])
-            print(f"Találkoztál a {csap_tipus} csáppal!")
+            print(f"\n🐙 TALÁLKOZTÁL A {csap_tipus.upper()} CSÁPPAL! 🐙")
             
             if csap_tipus == "zold":
                 # Zöld csáp - csillamgyumi kell
@@ -52,11 +53,11 @@ class Karakter:
                     if item.nev == "csillamgyumi":
                         csillamgyumi_megvan = True
                 if not csillamgyumi_megvan:
-                    print("A zöld csáp csillogó dolgot akar! Börtönbe kerültél!")
+                    print("💚 A zöld csáp csillogó dolgot akar! Börtönbe kerültél!")
                     self.bortonbe = True
                     return
                 else:
-                    print("Odaadtad a csillamgyumit a zöld csápnak.")
+                    print("✨ Odaadtad a csillamgyumit a zöld csápnak.")
                     # Eltávolítjuk a csillamgyumit
                     for i, item in enumerate(self.inventory):
                         if item.nev == "csillamgyumi":
@@ -69,11 +70,11 @@ class Karakter:
                     if item.nev == "sulthus":
                         sulthus_megvan = True
                 if not sulthus_megvan:
-                    print("A piros csáp nyers dolgot akar! Börtönbe kerültél!")
+                    print("❤️ A piros csáp nyers dolgot akar! Börtönbe kerültél!")
                     self.bortonbe = True
                     return
                 else:
-                    print("Odaadtad a sülthúst a piros csápnak.")
+                    print("🥩 Odaadtad a sülthúst a piros csápnak.")
                     # Eltávolítjuk a sülthúst
                     for i, item in enumerate(self.inventory):
                         if item.nev == "sulthus":
@@ -82,7 +83,7 @@ class Karakter:
         
         # Ha minden rendben, akkor léphetünk
         terkep.tartozkodasi_hely = hova
-        print(f"Elmentél ide: {hova}")
+        print(f"✅ Elmentél ide: {hova.upper()}")
 
     def felvesz(self):
         import jatek
@@ -93,7 +94,7 @@ class Karakter:
         targy_neve = jatek.targy_lista[hely_index]
         
         if targy_neve == "nincsitem":
-            print("Nincs itt semmi felvehető.")
+            print("❌ Nincs itt semmi felvehető.")
             return
 
         if targy_neve == "kulcs":
@@ -113,15 +114,15 @@ class Karakter:
         elif targy_neve == "kotel":
             targy_obj = targyak.kotel
         else:
-            print("Hiba: A tárgy nem található.")
+            print("❌ Hiba: A tárgy nem található.")
             return
 
         self.inventory.append(targy_obj)
-        print(f"Felvetted: {targy_obj.nev}")
+        print(f"✅ Felvetted: {targy_obj.nev.upper()}")
         jatek.targy_lista[hely_index] = "nincsitem"
 
     def hasznal(self):
-        targy=input("Mit akarsz használni?: ")
+        targy=input("🔧 Mit akarsz használni?: ")
         
         talalt_targy = None
         for item in self.inventory:
@@ -129,12 +130,13 @@ class Karakter:
                 talalt_targy = item
         
         if talalt_targy:
+            print(f"⚡ Használod: {talalt_targy.nev.upper()}")
             talalt_targy.hasznal()
         else:
-            print("Nincs ilyen tárgy az inventory-ban.")
+            print("❌ Nincs ilyen tárgy az inventory-ban.")
 
     def olvas(self):
-        targy=input("Mit akarsz olvasni?: ")
+        targy=input("📖 Mit akarsz olvasni?: ")
         
         talalt_targy = None
         for item in self.inventory:
@@ -143,11 +145,14 @@ class Karakter:
         
         if talalt_targy:
             if talalt_targy.tipus == "olvashato":
+                print("📜 OLVASOD:")
+                print("─"*40)
                 talalt_targy.felolvas()
+                print("─"*40)
             else:
-                print("Ez a tárgy nem olvasható.")
+                print("❌ Ez a tárgy nem olvasható.")
         else:
-            print("Nincs ilyen tárgy az inventory-ban.")
+            print("❌ Nincs ilyen tárgy az inventory-ban.")
 
     def ad(self):
         import jatek
@@ -167,20 +172,21 @@ class Karakter:
         
         # Konyha - házinéni logika
         if terkep.tartozkodasi_hely == "konyha":
-            kinek=input("Kinek akarod adni?: ")
+            kinek=input("👵 Kinek akarod adni?: ")
             if kinek == "hazineni":
                 if targy == "level":
-                    print("Odaadtad a levelet a házinéninek.")
+                    print("💌 Odaadtad a levelet a házinéninek.")
+                    print("👵 'Köszönöm! Most már mehetsz ahova akarsz!'")
                     self.inventory.pop(talalt_index)
                     # Beállítjuk, hogy odaadtuk a levelet
                     import jatek
                     jatek.level_odaadva = True
                     return
                 else:
-                    print("A házinéni csak a levelet fogadja el!")
+                    print("❌ A házinéni csak a levelet fogadja el!")
                     return
             else:
-                print("Itt csak a házinéni van.")
+                print("❌ Itt csak a házinéni van.")
                 return
         
         # Több karakteres játék esetén

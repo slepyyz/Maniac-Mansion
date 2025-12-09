@@ -17,13 +17,16 @@ jatek=True
 while jatek:
     # Ellenőrizzük, hogy a játékos börtönben van-e
     if karakterek.johnny.bortonbe:
-        print("Johnny börtönben van!")
+        print("\n" + "🚨"*20)
+        print("⛓️  JOHNNY BÖRTÖNBEN VAN! ⛓️")
+        print("🚨"*20)
         if karakterek_szama == 1:
-            print("Vége a játéknak!")
+            print("💀 VÉGE A JÁTÉKNAK! 💀")
+            print("Próbáld újra!")
             jatek = False
             continue
         else:
-            print("Váltás a másik karakterre...")
+            print("🔄 Váltás a másik karakterre...")
             # Itt lehetne karakterváltás logika
     
     # Ellenőrizzük a konyha logikát - házinéni (csak ha még nem adtuk oda a levelet)
@@ -33,13 +36,17 @@ while jatek:
             if item.nev == "level":
                 level_megvan = True
         if not level_megvan:
-            print("A konyhába lépve a házinéni rád kiált!")
-            print("'Hol a levelem?' - Börtönbe kerültél!")
+            print("\n" + "👵"*15)
+            print("👵 A konyhába lépve a házinéni rád kiált!")
+            print("👵 'HOL A LEVELEM?!' - Börtönbe kerültél!")
+            print("👵"*15)
             karakterek.johnny.bortonbe = True
             continue
     
     terkep.osszes_hely(szoba_lista,targy_lista)
-    lepes=input("Mit teszel?: ")
+    print("🎮 MIT TESZEL?")
+    print("⭐ Parancsok: megy, felvesz, használ, olvas, ad, váltás, vege")
+    lepes=input("🎯 Választásod: ")
     if lepes == "megy":
         karakterek.johnny.megy()
     elif lepes == "felvesz":
@@ -53,4 +60,8 @@ while jatek:
     elif lepes == "váltás":
         karakterek.johnny.valtas()
     elif lepes == "vege":
+        print("\n" + "🌟"*20)
+        print("🎮 KÖSZÖNJÜK A JÁTÉKOT! 🎮")
+        print("   Maniac Mansion kaland vége!")
+        print("🌟"*20)
         jatek = False
