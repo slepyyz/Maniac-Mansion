@@ -13,12 +13,10 @@ class Karakter:
         print("🚶 MOZGÁS:")
         hova=input("🗺️  Hova szeretnél menni?: ")
         
-        # Ellenőrizzük, hogy létezik-e a helyiség
         if hova not in jatek.szoba_lista:
             print("❌ Nincs ilyen helyiség!")
             return
         
-        # Bejárat ellenőrzés - csak kulccsal lehet bemenni (kivéve postaláda)
         if terkep.tartozkodasi_hely == "bejarat" and hova != "bejarat" and hova != "postalada":
             kulcs_megvan = False
             for item in self.inventory:
@@ -28,7 +26,6 @@ class Karakter:
                 print("🔐 A bejáratból csak a postaládához mehetsz kulcs nélkül!")
                 return
         
-        # Folyosó ellenőrzés - csak zseblámpával lehet bemenni
         if hova == "folyoso":
             zseblampa_megvan = False
             for item in self.inventory:
@@ -40,14 +37,12 @@ class Karakter:
                 self.bortonbe = True
                 return
         
-        # Labor ellenőrzés - csápok
         if hova == "labor":
             import random
             csap_tipus = random.choice(["zold", "piros"])
             print(f"\n🐙 TALÁLKOZTÁL A {csap_tipus.upper()} CSÁPPAL! 🐙")
             
             if csap_tipus == "zold":
-                # Zöld csáp - csillamgyumi kell
                 csillamgyumi_megvan = False
                 for item in self.inventory:
                     if item.nev == "csillamgyumi":
@@ -58,13 +53,11 @@ class Karakter:
                     return
                 else:
                     print("✨ Odaadtad a csillamgyumit a zöld csápnak.")
-                    # Eltávolítjuk a csillamgyumit
                     for i, item in enumerate(self.inventory):
                         if item.nev == "csillamgyumi":
                             self.inventory.pop(i)
                             return
             else:
-                # Piros csáp - sulthus kell
                 sulthus_megvan = False
                 for item in self.inventory:
                     if item.nev == "sulthus":
@@ -75,13 +68,11 @@ class Karakter:
                     return
                 else:
                     print("🥩 Odaadtad a sülthúst a piros csápnak.")
-                    # Eltávolítjuk a sülthúst
                     for i, item in enumerate(self.inventory):
                         if item.nev == "sulthus":
                             self.inventory.pop(i)
                             return
         
-        # Ha minden rendben, akkor léphetünk
         terkep.tartozkodasi_hely = hova
         print(f"✅ Elmentél ide: {hova.upper()}")
 
@@ -178,7 +169,6 @@ class Karakter:
                     print("💌 Odaadtad a levelet a házinéninek.")
                     print("👵 'Köszönöm! Most már mehetsz ahova akarsz!'")
                     self.inventory.pop(talalt_index)
-                    # Beállítjuk, hogy odaadtuk a levelet
                     import jatek
                     jatek.level_odaadva = True
                     return
@@ -189,7 +179,6 @@ class Karakter:
                 print("❌ Itt csak a házinéni van.")
                 return
         
-        # Több karakteres játék esetén
         if jatek.karakterek_szama > 1:
             kinek=input("Kinek akarod adni?: ")
             print(f"Odaadtad {targy}-t {kinek}-nek.")

@@ -15,7 +15,6 @@ belepes.invitacio()
 jatek=True
 
 while jatek:
-    # Ellenőrizzük, hogy a játékos börtönben van-e
     if karakterek.johnny.bortonbe:
         print("\n" + "🚨"*20)
         print("⛓️  JOHNNY BÖRTÖNBEN VAN! ⛓️")
@@ -27,9 +26,7 @@ while jatek:
             continue
         else:
             print("🔄 Váltás a másik karakterre...")
-            # Itt lehetne karakterváltás logika
     
-    # Ellenőrizzük a konyha logikát - házinéni (csak ha még nem adtuk oda a levelet)
     if terkep.tartozkodasi_hely == "konyha" and not level_odaadva:
         level_megvan = False
         for item in karakterek.johnny.inventory:
