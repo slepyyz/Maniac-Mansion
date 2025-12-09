@@ -10,5 +10,3 @@ csillamgyumi=Targy("csillamgyumi","labor","adhato")
 info=Targy("info","labor","olvashato","Elképesztően fontos információ ami nélkülözhetetlen a játék befejezéséhez")
 kotel=Targy("kotel","borton","hasznalhato")
 nincsitem=Targy("nothing","nothing","nothing")
-
-

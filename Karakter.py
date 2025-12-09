@@ -6,28 +6,28 @@ class Karakter:
     def __init__ (self, nev, eletero, inventory, bortonbe):
         self.nev= str(nev)
         self.eletero= int(eletero)
-        self.inventory= Targy
+        self.inventory= inventory
         self.bortonbe= bool(bortonbe)
 
     def megy():
         input("Hova szeretnél menni?: ")
         #lépés kód
 
-    def felvesz():
-        Targy.felvesz
+    def felvesz(self):
+        Targy.felvesz()
 
-    def hasznal(inventory):
+    def hasznal(self):
         targy=input("Mit akarsz használni?: ")
-        hasznalt=inventory.index(targy)
-        inventory[hasznalt].hasznal
+        hasznalt=self.inventory.index(targy)
+        self.inventory[hasznalt].hasznal()
 
-    def olvas(inventory):
+    def olvas(self):
         targy=input("Mit akarsz olvasni?: ")
-        olvasott=inventory.index(targy)
-        if inventory[olvasott].tipus== "olvashato":
-            inventory[olvasott].felolvas
+        olvasott=self.inventory.index(targy)
+        if self.inventory[olvasott].tipus== "olvashato":
+            self.inventory[olvasott].felolvas()
 
-    def ad(inventory):
+    def ad(self):
         targy=input("Mit akarsz odaadni?: ")
         if jatek.karakterek_szama >1:
             kinek=input("Kinek akarod adni?: ")
