@@ -1,0 +1,3 @@
+import belepes
+
+belepes.invitacio()
