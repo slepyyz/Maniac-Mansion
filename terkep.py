@@ -2,7 +2,7 @@ from Targy import Targy
 from Karakter import Karakter
 import karakterek
 
-tartozkodasi_hely="Bejárat"
+tartozkodasi_hely="bejarat"
 
 def osszes_hely(szoba_lista,targy_lista):
     print(f"Most itt vagy: {tartozkodasi_hely}")
