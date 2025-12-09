@@ -1,4 +1,7 @@
 import belepes
+
+karakterek_szama=1
+iranyitott_karakter=1
 import terkep
 
 szoba_lista=["bejarat","postalada","konyha","lepcso","dolgozo","nappali","labor","erkely","folyoso"]
